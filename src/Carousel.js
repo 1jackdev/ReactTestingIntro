@@ -10,15 +10,23 @@ function Carousel(props) {
   const card = props.cardData[cardIdx];
   const total = props.cardData.length;
   const goForward = () => setCardIdx(cardIdx + 1);
+  const goBackward = () => setCardIdx(cardIdx - 1);
 
+  let showLeftArrow;
+  cardIdx === 0 ? (showLeftArrow = "hidden") : (showLeftArrow = "visible");
+  let showRightArrow;
+  cardIdx === props.cardData.length - 1
+    ? (showRightArrow = "hidden")
+    : (showRightArrow = "visible");
   return (
     <div className="Carousel">
       <h1>{props.title}</h1>
       <div className="Carousel-main">
         <i
           className="fas fa-chevron-circle-left fa-2x"
-          onClick={goForward}
+          onClick={goBackward}
           data-testid="left-arrow"
+          style={{ visibility: showLeftArrow }}
         />
         <Card
           caption={card.caption}
@@ -30,6 +38,7 @@ function Carousel(props) {
           className="fas fa-chevron-circle-right fa-2x"
           onClick={goForward}
           data-testid="right-arrow"
+          style={{ visibility: showRightArrow }}
         />
       </div>
     </div>
@@ -40,18 +49,18 @@ Carousel.defaultProps = {
   cardData: [
     {
       src: image1,
-      caption: "Photo by Richard Pasquarella on Unsplash"
+      caption: "Photo by Richard Pasquarella on Unsplash",
     },
     {
       src: image2,
-      caption: "Photo by Pratik Patel on Unsplash"
+      caption: "Photo by Pratik Patel on Unsplash",
     },
     {
       src: image3,
-      caption: "Photo by Josh Post on Unsplash"
-    }
+      caption: "Photo by Josh Post on Unsplash",
+    },
   ],
-  title: "Shells from far away beaches."
+  title: "Shells from far away beaches.",
 };
 
 export default Carousel;
